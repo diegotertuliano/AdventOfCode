@@ -8,16 +8,16 @@ import scala.annotation.tailrec
 
 object Day01 extends IOApp {
 
-  def findTwoSum(totalSum: Int, input: List[Int]): Option[(Int, Int)] = {
+  def findTwoSum(totalSum: Int, input: List[Int]): Option[Int] = {
 
     @tailrec
-    def go(xs: List[Int], set: Set[Int] = Set.empty): Option[(Int, Int)] =
+    def go(xs: List[Int], set: Set[Int] = Set.empty): Option[Int] =
       xs match {
         case x :: xs =>
           val difference = totalSum - x
 
           if (set.contains(difference))
-            Some((x, difference))
+            Some(x * difference)
           else
             go(xs, set + x)
         case Nil => None
@@ -37,8 +37,8 @@ object Day01 extends IOApp {
           val maybeTwoSum = findTwoSum(difference, input)
 
           maybeTwoSum match {
-            case Some((n1, n2)) => Some(x * n1 * n2)
-            case None           => go(xs)
+            case Some(y) => Some(x * y)
+            case None    => go(xs)
           }
 
         case Nil => None
@@ -51,7 +51,7 @@ object Day01 extends IOApp {
   override def run(args: List[String]): IO[ExitCode] =
     for {
       input <- readFile("input/Day01").map(_.toInt).compile.toList
-      _ <- putStrLn(findTwoSum(2020, input).map { case (x, y) => x * y })
+      _ <- putStrLn(findTwoSum(2020, input))
       _ <- putStrLn(findThreeSum(2020, input))
     } yield ExitCode.Success
 }

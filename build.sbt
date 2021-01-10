@@ -13,6 +13,10 @@ lazy val root = (project in file("."))
       Libraries.catsEffect,
       Libraries.catsParse,
       Libraries.fs2Core,
-      Libraries.fs2Io
+      Libraries.fs2Io,
+      Libraries.enumeratum,
+      Libraries.newtype
     )
   )
+
+scalacOptions += "-Ymacro-annotations"
