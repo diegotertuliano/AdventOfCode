@@ -1,6 +1,6 @@
 package Solutions
 
-import Utils.Fs2.readFileAsIntStream
+import Utils.Fs2.readFile
 import Utils.IOFunctions.putStrLn
 import cats.effect._
 
@@ -50,7 +50,7 @@ object Day01 extends IOApp {
 
   override def run(args: List[String]): IO[ExitCode] =
     for {
-      input <- readFileAsIntStream("input/Day01").compile.toList
+      input <- readFile("input/Day01").map(_.toInt).compile.toList
       _ <- putStrLn(findTwoSum(2020, input).map { case (x, y) => x * y })
       _ <- putStrLn(findThreeSum(2020, input))
     } yield ExitCode.Success

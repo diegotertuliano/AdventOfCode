@@ -11,6 +11,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       Libraries.cats,
       Libraries.catsEffect,
+      Libraries.catsParse,
       Libraries.fs2Core,
       Libraries.fs2Io
     )
